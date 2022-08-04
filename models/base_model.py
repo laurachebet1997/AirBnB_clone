@@ -1,19 +1,21 @@
-#!/usr/bin/python3                                                                                                                                     
-""" Writing a base model for class attributes"""                                                                                                       
-                                                                                                                                                       
-import uuid                                                                                                                                            
-from datetime import datetime                                                                                                                          
-from uuid import uuid4                                                                                                                                 
-import models                                                                                                                                          
-import json                                                                                                                                            
-                                                                                                                                                       
-                                                                                                                                                       
-class Base_model:                                                                                                                                      
-    """Basemodel class"""                                                                                                                              
-    def __init__(self, *args, **kwargs):                                                                                                               
-        """Database initialization"""                                                                                                                  
-        if args is not None and  len(args) > 0:                                                                                                        
-            pass                                                                                                                                       
+#!/usr/bin/python3
+""" Writing a base model for class attributes"""
+
+import uuid
+from datetime import datetime
+from uuid import uuid4
+import models
+import json
+
+format_dt = "%Y-%m-%dT%H:%M:%S.%f"
+
+
+class Base_model:
+    """Basemodel class"""
+    def __init__(self, *args, **kwargs):
+        """Database initialization"""
+        if args is not None and  len(args) > 0:
+            pass
         if **kwargs:
             for key, value in kwargs.items():
                 if key in ['created_at', 'updated_at']:
@@ -24,8 +26,8 @@ class Base_model:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
             models.storage.new(self)
-    
-    def dict_defination(self):
+
+    def to_dict(self):
         """Defining a dictionary"""
         userDictionary = {}
         for key, value in self.__dict__.items():
@@ -41,8 +43,8 @@ class Base_model:
         return("[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__))
 
-    def save_userInfor(self):
+    def save(self):
         """ Save definition """
         self.updated_at = datetime.now()
         models.storage.new(self)
-        models.storage.save_userInfor()
+        models.storage.save()
