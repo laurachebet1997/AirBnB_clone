@@ -10,7 +10,7 @@ import json
 format_dt = "%Y-%m-%dT%H:%M:%S.%f"
 
 
-class Base_model:
+class BaseModel:
     """Basemodel class"""
     def __init__(self, *args, **kwargs):
         """Database initialization"""
