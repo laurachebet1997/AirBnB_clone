@@ -6,14 +6,15 @@ from json import dumps, load, dump
 from os.path import exists
 from models import base_model, user, place, state, city, amenity, review
 
-BModel = base_model.BaseModel
+BaseModel = base_model.BaseModel
 User = user.User
 Place = place.Place
 State = state.State
 City = city.City
 Amenity = amenity.Amenity
 Review = review.Review
-name_class = ["BModel", "City", "State", "Place", "Amenity", "Review", "User"]
+name_class = ["BaseModel", "City", "State",
+              "Place", "Amenity", "Review", "User"]
 
 
 class FileStorage:
