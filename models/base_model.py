@@ -18,7 +18,7 @@ class BaseModel:
 
         if args is not None and len(args) > 0:
             pass
-        if **kwargs:
+        if kwargs:
             for key, value in kwargs.items():
                 if key in ['created_at', 'updated_at']:
                     item = datetime.strptime(item, format_dt)
