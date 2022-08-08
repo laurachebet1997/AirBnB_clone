@@ -6,27 +6,30 @@ from json import dumps, load, dump
 from os.path import exists
 from models import base_model, user, place, state, city, amenity, review
 
-BaseModel = base_model.BaseModel
+BModel = base_model.BaseModel
 User = user.User
 Place = place.Place
 State = state.State
 City = city.City
 Amenity = amenity.Amenity
 Review = review.Review
-name_class = ["BaseModel", "City", "State", "Place", "Amenity", "Review", "User"]
+name_class = ["BModel", "City", "State", "Place", "Amenity", "Review", "User"]
 
 
 class FileStorage:
     """Store user input files"""
+
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
         """All initialization"""
+
         return FileStorage.__objects
 
     def new(self, obj):
         """Sets  the obj with key in __objects"""
+
         class_name = obj.__class__.__name__
         id = obj.id
         clas_id = class_name + "." + id
@@ -34,14 +37,16 @@ class FileStorage:
 
     def save(self):
         """Saving file to storage"""
+
         userDictionary_to_json = {}
         for key, value in FileStorage.__objects.items():
             dict_to_json[key] = value.to_dict()
-            with open(FileStorage.__file_path, "w", encoding='utf-8') as fileToReturn:
-                dump(userDictionary_to_json, fileToReturn)
+            with open(FileStorage.__file_path, "w", encoding='utf-8') as f:
+                dump(userDictionary_to_json, f)
 
     def reload(self):
         """Deserializes the JSON file"""
+
         obj_dict = {}
         FileStorage.__object = {}
         if (exists(FileStorage.__file_path)):
