@@ -41,7 +41,7 @@ class FileStorage:
 
         userDictionary_to_json = {}
         for key, value in FileStorage.__objects.items():
-            dict_to_json[key] = value.to_dict()
+            userDictionary_to_json[key] = value.to_dict()
             with open(FileStorage.__file_path, "w", encoding='utf-8') as f:
                 dump(userDictionary_to_json, f)
 
