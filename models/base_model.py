@@ -21,9 +21,9 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key in ['created_at', 'updated_at']:
-                    item = datetime.strptime(item, format_dt)
+                    value = datetime.strptime(value, format_dt)
                 if key not in ['__class__']:
-                    setattr(self, key, item)
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
@@ -32,10 +32,8 @@ class BaseModel:
     def to_dict(self):
         """Defining a dictionary"""
 
-        userDictionary = {}
-        for key, value in self.__dict__.items():
-            if key in ['created_at', 'updated_at']:
-                userDictionary[key] = item
+        userDictionary = self.__dict__.copy()  # fork,vinself.__dict__.items():
+        # if key in ['created_at', 'updated_at']:# userDictionary[key] = item
         userDictionary['__class__'] = self.__class__.__name__
         userDictionary['created_at'] = self.created_at.isoformat()
         userDictionary['updated_at'] = self.updated_at.isoformat()
