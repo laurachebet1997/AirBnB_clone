@@ -20,7 +20,7 @@ class Test_Place(unittest.TestCase):
 
     def test_Place_dict(slf):
         """ Place_dict """
-        
+
         dt = datetime.today()
         pl = Place()
         pl.id = "123456"
@@ -32,15 +32,15 @@ class Test_Place(unittest.TestCase):
                 'updated_at': dt.isoformat(),
                 }
         self.assertDictEqual(pl.to_dict(), tdict)
-    
+
     def test_save_Place(self):
         """ Save_Place """
 
-         pl = Place()
-         pl.save()
-         plid = "Place." + pl.id
-         with open("file.json", "r") as f:
-             self.assertIn(plid, f.read())
+        pl = Place()
+        pl.save()
+        plid = "Place." + pl.id
+        with open("file.json", "r") as f:
+            self.assertIn(plid, f.read())
 
 
 if __name__ == '__main__':

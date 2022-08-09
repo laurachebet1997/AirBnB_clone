@@ -13,15 +13,19 @@ from time import sleep
 from models.user import User
 
 
-class Test_City(unittest.TestCase):
+class Test_User(unittest.TestCase):
     """ Tests city """
-    def test_pep8_City(self):
+
+    def test_pep8_User(self):
         """Tests pep8 style"""
+
         style = pep8.StyleGuide(quiet=True)
-        p = style.check_files(['models/city.py'])
-        self.assertEqual(p.total_errors, 0, "Check pep8"
+        p = style.check_files(['models/user.py'])
+        self.assertEqual(p.total_errors, 0, "Check pep8")
 
     def test_save_updates_file(self):
+        """Save files"""
+
         us = User()
         us.save()
         usid = "User." + us.id
@@ -29,6 +33,8 @@ class Test_City(unittest.TestCase):
             self.assertIn(usid, f.read())
 
     def test_to_dict_output(self):
+        """ Dictionary"""
+
         dt = datetime.today()
         us = User()
         us.id = "123456"
@@ -38,7 +44,7 @@ class Test_City(unittest.TestCase):
             '__class__': 'User',
             'created_at': dt.isoformat(),
             'updated_at': dt.isoformat(),
-        }
+            }
         self.assertDictEqual(us.to_dict(), tdict)
 
 
